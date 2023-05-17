@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,8 @@ import { RouterModule } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   imports: [
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ]
 })
 export class AppComponent {

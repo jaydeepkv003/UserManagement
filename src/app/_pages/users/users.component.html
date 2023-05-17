@@ -1,1 +1,75 @@
-<p>users works!</p>
+<form action="" [formGroup]="userGroup">
+    <div class="header">
+        <table class="w-50">
+            <tr>
+                <th class="text-left w-25">First Name</th>
+                <th class="text-left w-25">Last Name</th>
+                <th class="text-left w-25">Maiden Name</th>
+                <th class="text-left w-25">Gender</th>
+            </tr>
+        </table>
+    </div>
+    <mat-accordion *ngIf="isContentReady" formArrayName="userGroupArray" #accordion="matAccordion">
+        <mat-expansion-panel *ngFor="let item of userArray.controls; let
+            i=index" [formGroupName]="i">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <table class="w-50">
+                        <tr>
+                            <td class="w-25">{{item.get('firstName').value}}</td>
+                            <td class="w-25">{{item.get('lastName').value}}</td>
+                            <td class="w-25">{{item.get('maidenName').value}}</td>
+                            <td class="w-25">{{item.get("gender").value}}</td>
+                        </tr>
+                    </table>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="form-main">
+                <div class="form-group">
+                    <div class="form-control d-flex align-items-center">
+                        <div class="mw-50">
+                            <div class="d-flex align-items-center pr-1">
+                                <label for="firstName">First Name:</label>
+                                <input type="text" id="firstName"
+                                    formControlName="firstName" class="w-100">
+                            </div>
+                        </div>
+                        <div class="mw-50">
+                            <div class="d-flex align-items-center p-0">
+                                <label for="lastName">Last Name:</label>
+                                <input type="text" id="lastName"
+                                    formControlName="lastName" class="w-100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-control d-flex align-items-center">
+                        <div class="mw-50">
+                            <div class="d-flex align-items-center pr-1">
+                                <label for="maidenName">Maiden Name:</label>
+                                <input type="text" id="maidenName"
+                                    formControlName="maidenName" class="w-100">
+                            </div>
+                        </div>
+                        <div class="mw-50">
+                            <div class="d-flex align-items-center p-0">
+                                <label for="gender">Gender:</label>
+                                <select id="gender" formControlName="gender"
+                                    class="w-100">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button mat-flat-button color="primary" class="mr-1" (click)="onSave(i)">Save <img src="assets/loading-icon.gif" width="15" *ngIf="isSpinner"/></button>
+                    <button mat-flat-button color="warn" (click)="accordion.closeAll()">Cancel</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</form>
+<div class="spinner fixed-center" *ngIf="isSpinner">
+    <mat-spinner></mat-spinner>
+</div>
